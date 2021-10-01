@@ -1,0 +1,7 @@
+The FootBridge News App analyzes news articles from Conservative and Liberal News sites, and presents related articles, grouped together.
+Its goal is to promote mutual understanding across the political divide.
+
+It is currently in Beta Release, with a production release anticipated in October 2021.
+
+Inquiries and comments should be addressed to FootBridgeNews@gmail.com.
+
