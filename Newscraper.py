@@ -55,9 +55,6 @@ class NewsScraper:
         print("articleText: {0}".format(articleText))
 
 
-
-        
-
         pass
 
 
