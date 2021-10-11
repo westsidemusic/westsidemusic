@@ -14,7 +14,7 @@ class NewsScraper:
             "articleElementQualifier": {'class' : 'story-text__paragraph'},
             "elementContentToSkip": ["Image", "Photo"],
             # "articleStringsToRemove": [  # ".*EDT"#],
-            "imageSelector": "[property=og:image]"
+            "imageSelector": "og:image"
              }
             ]
         # "articleElementType": "p",
@@ -36,12 +36,14 @@ class NewsScraper:
         articleDict = {}
         articleElementType = siteConfig["articleElementType"]
         articleElementQualifier = siteConfig["articleElementQualifier"]
+        imageSelector = siteConfig["imageSelector"]
         response = requests.get(link)
         content = response.content
         soup = BeautifulSoup(content, 'html.parser')
         allTitles = soup.find_all('title')
         title = allTitles[0].string
         articleDict["title"] = title
+        articleDict["url"] = link
         #articleElements = soup.find_all(articleElementType)
         #soup.find('p', attrs={'class' : 'lead'})
         # articleElements = soup.find_all(articleElementType, attrs={'class' : 'story-text__paragraph'})
@@ -52,7 +54,18 @@ class NewsScraper:
                 print(element)
             # print("element string: {0}".format(element.text))
             articleText += element.text
-        print("articleText: {0}".format(articleText))
+        # print("articleText: {0}".format(articleText))
+        articleDict["articleText"] = articleText
+
+        # imageURL = soup.select(imageSelector)
+        # imageURL = soup.find("meta", {"og":"image"})['content'] 
+        # imageURL = soup.find_all("meta")
+        # metas = soup.select('meta["og":"image"]')
+        imageURL = soup.find("meta", property=imageSelector).get('content')
+
+
+        print(link)
+        print(imageURL)
 
 
         pass
